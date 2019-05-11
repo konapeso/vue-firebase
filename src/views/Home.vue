@@ -6,7 +6,7 @@
     <ul>
       <li v-for="(room,i) in rooms" :key="'room-id-'+i">
         <p>{{ room.name }}</p>
-        <button>join chat</button>
+        <button @click="goToChatRoom(room)">join chat</button>
       </li>
     </ul>
   </div>
@@ -26,7 +26,7 @@ export default {
       .then(ss => {
         const rooms = [];
         ss.docs.forEach(room => {
-          rooms.push(room.data());
+          rooms.push({ ...room.data(), id: room.id });
         });
 
         this.rooms = rooms;
@@ -36,6 +36,12 @@ export default {
     return {
       rooms: []
     };
+  },
+
+  methods: {
+    goToChatRoom(room) {
+      this.$router.push({ name: "chat-room", params: { id: room.id } });
+    }
   }
 };
 </script>
