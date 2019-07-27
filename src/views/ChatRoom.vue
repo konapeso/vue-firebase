@@ -50,7 +50,7 @@ export default {
     sendMessage(event) {
       event.preventDefault();
 
-      const roomRef = firbase
+      const roomRef = firebase
         .firestore()
         .collection("rooms")
         .doc(this.$route.params.id);
